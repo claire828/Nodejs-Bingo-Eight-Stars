@@ -1,1 +1,1 @@
-# TS-Binfo-Eight-Stars
+# TS-Bingo-Eight-Stars
