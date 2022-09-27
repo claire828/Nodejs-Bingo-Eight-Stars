@@ -44,10 +44,9 @@ export class NatureProducer extends BasicProducer {
     private getPowerWeightsByStart(starAmount: number) {
         let ids = _.range(1, 5);
         let form = this._bingoInfo.bingoConfig.Power;
-        if (starAmount == 5) return form.getColValueByIds(`weights_5star`, ids);
-        if (starAmount == 6) return form.getColValueByIds(`weights_6star`, ids);
-        if (starAmount == 7) return form.getColValueByIds(`weights_7star`, ids);
-        if (starAmount == 8) return form.getColValueByIds(`weights_8star`, ids);
+        if(![5,6,7,8].includes(starAmount)) return;
+
+        return form.getColValueByIds(`weights_${starAmount}star`, ids);
     }
 
 
