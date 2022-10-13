@@ -13,7 +13,9 @@ Sensitive codes has been takeoff except the main logic.
 ![demo](/assets/demo.jpg)
 
 ## flows
-![flow](/assets/flow.jpeg)
+[link](https://gitmind.com/app/flowchart/ak9h63ijzk)
+![flow](/assets/flow.jpeg) 
+
 
   
 
