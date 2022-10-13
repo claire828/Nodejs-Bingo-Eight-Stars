@@ -129,8 +129,8 @@ export abstract class BaseBingoExecutor {
     protected get generateRpcResult(): SpinRpc {
        
         //付費資訊
-        let resourceResult = this.executeResourceAndRoundRecord();
-        let spinResult: SpinRpc = {
+        const resourceResult = this.executeResourceAndRoundRecord();
+        const spinResult: SpinRpc = {
             bingo: this._bingoResult.randInfo.finalIds,
             balls: this._bingoResult.randInfo.balls,
             pay: resourceResult.pay,
@@ -143,11 +143,11 @@ export abstract class BaseBingoExecutor {
 
 
     private executeResourceAndRoundRecord(): ResourceResult {
-        let playerSlotInfo = this._bingoStruct.player.slotData.get(this._bingoStruct.slotId);
+        const playerSlotInfo = this._bingoStruct.player.slotData.get(this._bingoStruct.slotId);
         playerSlotInfo.incRound2();
-        let reason: string = "";
-        let comResPay = this.minusSpinResource();
-        let comResGet = this.giveSlotResource(reason, this.forecingLog);
+        const reason: string = "";
+        const comResPay = this.minusSpinResource();
+        const comResGet = this.giveSlotResource(reason, this.forecingLog);
         console.log(`第幾round的結果:${this.round}`);
         return {
             pay: comResPay,
@@ -167,7 +167,7 @@ export abstract class BaseBingoExecutor {
      * 扣除資源
      */
     private minusSpinResource(): ComResourceModule.ComResource[] {
-        let $PAY = this._bingoStruct.player.comRes.startTag('pay');
+        const $PAY = this._bingoStruct.player.comRes.startTag('pay');
         if (!this._bingoStruct.player.pdResource.minus('money', this.totalPay, GameType.Slot, this._bingoStruct.slotId, this.round)) {
             throw new SpinError.Spin(DisconnectCause.UserError, `Not enough of Money, a_id: ${this._bingoStruct.player.pdAccount.a_id}`);
         }
@@ -177,7 +177,7 @@ export abstract class BaseBingoExecutor {
 
     
     public get round(): number {
-        let playerSlotInfo = this._bingoStruct.player.slotData.get(this._bingoStruct.slotId);
+        const playerSlotInfo = this._bingoStruct.player.slotData.get(this._bingoStruct.slotId);
         return playerSlotInfo.getRound();
     }
 
@@ -186,7 +186,7 @@ export abstract class BaseBingoExecutor {
      */
     private giveSlotResource(comment: string, forceLog: boolean): ComResourceModule.ComResource[] {
         console.log(`倍率結果: starRate:${this.starRate}  totalBet:${this.totalBet}, powerRate:${this._bingoResult.randInfo.powerRate}`);
-        let noWin = this.totalWin <= 0;
+        const noWin = this.totalWin <= 0;
         if (noWin && !forceLog) {
             console.log(`不寫Log noWin:${noWin}  forceLog:${forceLog}`);
             return [];
